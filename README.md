@@ -12,8 +12,8 @@
     * Django Tables 2
     * Dill
     * Sklearn
+    * A gun with a single bullet
 
-  * Change the filepath for the model to your own
 
    ## TO DO
 
