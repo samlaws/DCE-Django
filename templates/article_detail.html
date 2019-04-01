@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="article-entry">
+    <h3>Object ID: {{ object.id }}</h3>
+    <p>Source: <br>{{ object.source }}</p>
+    <p>Date Created: <br>{{ object.date }}</p>
+  <p>Description: <br>{{ object.body }}</p>
+  <p>Classification: <br>{{object.body_str}}</p>
+</div>
+<p><a href="{% url 'article_edit' article.pk %}">Edit</a> | <a href="{% url 'a\
+rticle_delete' article.pk %}">Delete</a></p>
+<p>Back to <a href="{% url 'table' %}">All Articles</a>.</p>
+
+{% endblock content %}

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Delete</h1>
+<form action="" method="post">
+  {% csrf_token %}
+  <p>Are you sure you want to delete Defect #{{ article.id }}?</p>
+  <button class="btn btn-danger" type="submit">Confirm</button>
+</form>
+<a href="/articles/table" class="btn btn-primary">Back</a>
+{% endblock %}

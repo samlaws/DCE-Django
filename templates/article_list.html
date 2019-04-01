@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Articles{% endblock %}
+{% block content %}
+  {% for article in object_list %}
+    <div class="card">
+      <div class="card-header">
+        <span class="font-weight-bold">ID: {{ article.defect_id }}</span>
+        <span class="text-muted">| {{ article.source }} | {{ article.date }}</span>
+        <span class="text-right" style="float: right"> <a href="{% url 'article_edit' article.pk %}">Edit</a> |
+           <a href="{% url 'article_delete' article.pk %}">Delete</a></span>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          {{ article.body }}
+        </li>
+        <li class="list-group-item font-weight-bold">
+          {{ article.body_str }}
+        </li>
+      </ul>
+    </div>
+    <br />
+  {% endfor %}
+  {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="/articles?page={{ page_obj.previous_page_number }}" class="btn btn-primary">Previous</a>
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="/articles?page={{ page_obj.next_page_number }}" class="btn btn-primary">Next</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+{% endblock content %}

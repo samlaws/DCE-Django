@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="card" style="width: 20rem; margin: 0 auto; margin-top: 7.5rem;">
+  <div class="card-body">
+    <h5 class="card-title text-center">Error</h5>
+    <p class="card-text text-center">You have uplaoded a file that is not a csv or has the wrong columns.</p>
+    <div class="card-footer text-center">
+      <a href="{% url 'upload' %}" class="btn btn-primary">Try Again</a>
+    </div>
+</div>
+</div>
+
+{% else %}
+<div class="card" style="width: 20rem; margin: 0 auto; margin-top: 7.5rem;">
+    <div class="card-body">
+      <h5 class="card-title text-center">You are not signed in.</h5>
+      <p class="card-text text-center">Please either log in or create an account</p>
+      <div class="card-footer text-center">
+        <a href="{% url 'signup' %}" class="btn btn-primary">Sign up</a>
+        <a href="{% url 'login' %}" class="btn btn-success">Log in</a>
+  </div>
+  </div>
+{% endif %}
+{% endblock %}
