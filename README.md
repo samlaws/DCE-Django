@@ -1,13 +1,22 @@
-# Defect Classification Engine
-Cannibalized from the final few chapters of the Django for beginners book but
-with a plugged in defect classification model.
+  # DCE
 
-TO DO:
+  The Defect classification engine is a website created using the Django package of python, the primary app of the site uses a pre-trained multilayer perceptron to classify defects from various sources.
 
-  Add sort by classification (currently just sorts by id)
+  The site also supports user account creation and basic authentication.
 
-  Add Search functionality
+  ## Requirements
 
-  Add filter functionality
-  
-  Sort out user groups/authentication
+  * Python Environment with:
+    * Django
+    * Django Crispy Forms
+    * Django Tables 2
+    * Dill
+    * Sklearn
+
+  * Change the filepath for the model to your own
+
+   ## TO DO
+
+   * Add filter functionality to the table view so the user can select a combination of sources and classifications to view
+   * Add a Requirements.txt to the repository
+   * Possibly add tests (shhh)
