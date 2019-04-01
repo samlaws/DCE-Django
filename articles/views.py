@@ -114,7 +114,7 @@ def article_download(request):
     writer.writerow(['Body', 'Classification'])
 
     for obj in items:
-        writer.writerow([obj.body, classify_defect(obj.body)])
+        writer.writerow([obj.body, obj.classification])
 
     return response
 
