@@ -1,11 +1,14 @@
 import os
 from sklearn.externals import joblib
 from django.core.cache import cache
+from pathlib import Path
 
 def classify_defect(phrase):
 
     model_cache_key = 'mlp_model'
-    path = "C:\\Users\\U89579\\Documents\\Django-Deployment\\DCE\\Defects\\articles\\dce_model.pkl"
+
+    base_path = Path(__file__).parent
+    path = (base_path / "\\dce_model.pkl").resolve()
 
     model = cache.get(model_cache_key)
 
@@ -29,4 +32,3 @@ def classify_defect(phrase):
 	    return 'Usability'
     elif prediction == [0]:
         return 'Compliance'
-
