@@ -6,7 +6,7 @@ TO DO:
 
   Add sort by classification (currently just sorts by id)
 
-  A̶d̶d̶ ̶S̶e̶a̶r̶c̶h̶ ̶f̶u̶n̶c̶t̶i̶o̶n̶a̶l̶i̶t̶y̶
+  Add Search functionality
 
   Add filter functionality
   
