@@ -9,15 +9,15 @@ class ArticleTable(tables.Table):
     #date = DateTimeColumn(format='d-m-y H:i', )
     detail = TemplateColumn(template_name='training_update_column.html')
     delete = TemplateColumn(template_name='training_delete_column.html')
+    reclassify = TemplateColumn(template_name = 'training_reclassify_column.html')
 
 
     class Meta:
         model = models.Article
 
         template_name = 'django_tables2/bootstrap.html'
-        fields = ('id', 'body', 'source', 'classification', 'date', 'detail', 'delete')
+        fields = ('id', 'body', 'source', 'classification', 'date', 'detail', 'delete', 'reclassify', 'reclassification')
         attrs={'td': {'bgcolor': '#F3F3EE'},
             'th': {'bgcolor': '#61615F'},
             'tf': {'color': '#F3F3EE'}
             }
-

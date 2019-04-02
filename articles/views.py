@@ -37,7 +37,8 @@ def article_table(request):
 
     if 'search' in request.GET:
         search_term = request.GET['search']
-        article = article.filter(Q(body__icontains=search_term)|Q(source__icontains =search_term)|Q(id__icontains=search_term)|Q(classification__icontains=search_term))
+        article = article.filter(Q(body__icontains=search_term)|Q(source__icontains =search_term)|Q(id__icontains=search_term)
+        |Q(classification__icontains=search_term)|Q(reclassification__icontains=search_term))
 
 
     table = ArticleTable(article.order_by('-id'))
@@ -73,6 +74,11 @@ class ArticleDeleteView(DeleteView):
     model = models.Article
     template_name = 'article_delete_2.html'
     success_url = reverse_lazy('table')
+
+class ArticleReclassify(UpdateView):
+    model = models.Article
+    fields = ['reclassification']
+    template_name = 'article_reclassify.html'
 
 
 def article_upload(request):
@@ -117,5 +123,3 @@ def article_download(request):
         writer.writerow([obj.body, obj.classification])
 
     return response
-
-

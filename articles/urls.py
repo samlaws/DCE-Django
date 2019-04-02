@@ -11,6 +11,7 @@ urlpatterns = [
     path('<int:pk>/', views.ArticleDetailView.as_view(), name='article_detail'), # new
     path('<int:pk>/delete/', views.ArticleDeleteView.as_view(), name='article_delete'),
     path('table', views.article_table, name='table'),
+    path('<int:pk>/reclassify/', views.ArticleReclassify.as_view(), name='article_reclassify'),
 
 
 
