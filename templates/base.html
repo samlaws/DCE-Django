@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" >
 
+
     <title>{% block title %} Defect Classification App {% endblock title %}</title>
     <style type="text/css">
       body { background:  url('https://images.pexels.com/photos/1092364/pexels-photo-1092364.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
@@ -25,20 +26,54 @@
           background-repeat: repeat;
           padding: 15px;}
 
-
-
-
-     .search_bar {
+      .search_bar {
           position:absolute;
           left:75%;
           top:14%;
           width:30%;
           }
 
+      .delete_btn {
+           border: none; /* Remove borders */
+           color: gray; /* White text */
+           padding: 12px 16px; /* Some padding */
+           font-size: 25px; /* Set a font size */
+           cursor: pointer; /* Mouse pointer on hover */
+              }
+
+      .detail_btn {
+           border: none; /* Remove borders */
+           color: gray; /* White text */
+           padding: 12px 16px; /* Some padding */
+           font-size: 25px; /* Set a font size */
+           cursor: pointer; /* Mouse pointer on hover */
+            }
+
+      .update_btn {
+           border: none; /* Remove borders */
+           color: gray; /* White text */
+           padding: 12px 16px; /* Some padding */
+           font-size: 25px; /* Set a font size */
+           cursor: pointer; /* Mouse pointer on hover */
+            }
+
+
+      .delete_btn:hover {
+           color: Red;
+                }
+
+      .detail_btn:hover {
+           color: Blue;
+                }
+
+      .update_btn:hover {
+           color: Green;
+                }
 
     </style>
 
     <link rel="shortcut icon" href='favicon/leeds_data_science_logo__1__C6d_icon.ico'/>
+
 
   </head>
 
