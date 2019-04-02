@@ -13,12 +13,13 @@
     <link rel="stylesheet" >
 
 
-    <title>{% block title %} Defect Classification App {% endblock title %}</title>
+    <title>{% block title %}  Defect Classification App {% endblock title %}</title>
     <style type="text/css">
       body { background:  url('https://images.pexels.com/photos/1092364/pexels-photo-1092364.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
       background-repeat: no-repeat;
       background-size: auto;
       background-attachment: fixed; } /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
+
 
       .boxed {
           border-radius: 10px;
@@ -90,14 +91,14 @@
 
       <a class="navbar-brand boxed" style="color:black" href="{% url 'home' %}">
         <img src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678122-cogs-512.png"
-        alt="Cog" height='26px', width="26px">Defect Classification App</a>
+             alt="Cog" height='26px', width="26px"><span style = "font-family:Courier New">Defect Classification App</span></a>
       {% if user.is_authenticated %}
       <a class="navbar-brand">|</a>
-      <a class="navbar-brand" href="/articles/table">View Defects</a>
+      <a class="navbar-brand" href="/articles/table"><span style = "font-family:Courier New">View Defects</span></a>
       <a class="navbar-brand">|</a>
-      <a class="navbar-brand" href="/articles\new">Add new Defect</a>
+      <a class="navbar-brand" href="/articles\new"><span style = "font-family:Courier New">Add new Defect</span></a>
       <a class="navbar-brand">|</a>
-      <a class="navbar-brand" href="/articles\download">Download Defects</a>
+      <a class="navbar-brand" href="/articles\download"><span style = "font-family:Courier New">Download Defects</span></a>
       {% else %}
       {% endif %}
 
