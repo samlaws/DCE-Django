@@ -1,21 +1,21 @@
 {% extends 'base.html' %}
 
+{% load bootstrap4 %}
 {% load django_tables2 %}
 {% block content %}
 
 {% if user.is_authenticated %}
   <!-- Load icon library -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
 <!-- The form -->
 
-<form class="search_bar">
-  <input type="search" placeholder="Search" aria-label="Search" name = 'search' value = "{{search_term}}">
-  <button type="submit"><i class="fa fa-search"></i></button>
-</form><br>
-
-  {% render_table article_table_instance %}
-
+  {% if filter %}
+      <form action="" method="get" class="form form-inline">
+          {% bootstrap_form filter.form layout='inline' %}
+            <button class="btn btn-success ml-2" type="submit">GO</button>
+      </form>
+  {% endif %}
+  {% render_table table 'django_tables2/bootstrap.html' %}
 
 {% else %}
 <div class="card" style="width: 20rem; margin: 0 auto; margin-top: 7.5rem;">
@@ -29,7 +29,3 @@
   </div>
 {% endif %}
 {% endblock content %}
-
-
-
-
