@@ -17,5 +17,6 @@
    ## TO DO
 
    * Reproduce Michael's search bar functionality for searching body
+   * Make the table a fixed size
    * Add a Requirements.txt to the repository
    * Possibly add tests (shhh)
