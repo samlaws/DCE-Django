@@ -2,13 +2,13 @@ import os
 from sklearn.externals import joblib
 from django.core.cache import cache
 from pathlib import Path
+from newspaper.settings import BASE_DIR
 
 def classify_defect(phrase):
 
     model_cache_key = 'mlp_model'
 
-    base_path = Path(__file__).parent
-    path = (base_path / "\\dce_model.pkl").resolve()
+    path = os.path.join(BASE_DIR, 'articles//dce_model.pkl')
 
     model = cache.get(model_cache_key)
 
@@ -20,7 +20,9 @@ def classify_defect(phrase):
 
     prediction = model.predict([phrase])
 
-    if prediction == [1]:
+    if prediction == [0]:
+        return 'Compliance'
+    elif prediction == [1]:
 	    return 'Functional'
     elif prediction == [2]:
         return 'Performance'
@@ -30,5 +32,3 @@ def classify_defect(phrase):
 	    return 'Security'
     elif prediction == [5]:
 	    return 'Usability'
-    elif prediction == [0]:
-        return 'Compliance'
