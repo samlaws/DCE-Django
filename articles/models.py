@@ -10,15 +10,6 @@ class Article(models.Model):
     source = models.CharField(default='Entry', max_length=20)
     date = models.DateTimeField(auto_now_add=True)
     classification = models.CharField(default = 'Not Classified', max_length = 20)
-    classes = (
-        ('compliance', 'COMPLIANCE'),
-        ('functional', 'FUNCTIONAL'),
-        ('performance', 'PERFORMANCE'),
-        ('reliability and scalability issues', 'RELIABILITY AND SCALABILITY ISSUES'),
-        ('security', 'SECURITY'),
-        ('usability', 'USABILITY'),
-        )
-    reclassification = models.CharField(default = 'Not Reclassified Yet', max_length = 50, choices = classes)
 
     def __str__(self):
         return self.body
