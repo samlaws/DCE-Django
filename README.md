@@ -16,6 +16,6 @@
 
    ## TO DO
 
-   * Add filter functionality to the table view so the user can select a combination of sources and classifications to view
+   * Reproduce Michael's search bar functionality for searching body
    * Add a Requirements.txt to the repository
    * Possibly add tests (shhh)
