@@ -6,8 +6,9 @@ class ArticleFilter(django_filters.FilterSet):
 
     source = django_filters.ChoiceFilter(choices=STATUS_CHOICES_SOURCE)
     classification = django_filters.ChoiceFilter(choices=STATUS_CHOICES_CLASS)
+    body = django_filters.CharFilter(lookup_expr='icontains')
 
 
     class Meta:
         model = Article
-        fields = [ 'id', 'source', 'classification',]
+        fields = [ 'id', 'source', 'classification', 'body']

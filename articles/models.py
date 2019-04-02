@@ -22,7 +22,7 @@ class Article(models.Model):
     body = models.TextField()
     source = models.CharField(default='Entry', max_length=20, choices=STATUS_CHOICES_SOURCE)
     date = models.DateTimeField(auto_now_add=True)
-    classification = models.CharField(default = 'Not Classified', max_length = 20, choices=STATUS_CHOICES_CLASS)
+    classification = models.CharField(default = 'Not Classified', max_length = 100, choices=STATUS_CHOICES_CLASS)
     classes = (
         ('compliance', 'COMPLIANCE'),
         ('functional', 'FUNCTIONAL'),
@@ -31,7 +31,7 @@ class Article(models.Model):
         ('security', 'SECURITY'),
         ('usability', 'USABILITY'),
         )
-    reclassification = models.CharField(default = 'Not Reclassified Yet', max_length = 50, choices = classes)
+    reclassification = models.CharField(default = 'Not Classified Yet', max_length = 50, choices = classes)
 
 
     def __str__(self):

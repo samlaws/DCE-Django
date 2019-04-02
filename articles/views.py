@@ -16,6 +16,8 @@ from django_filters.views import FilterView
 from django_tables2.views import SingleTableMixin
 from .filters import ArticleFilter
 
+
+
 class FilteredArticleListView(SingleTableMixin, FilterView):
     table_class = ArticleTable
     model = models.Article

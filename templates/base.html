@@ -2,6 +2,7 @@
 <!doctype html>
 <html lang="en">
   <head>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, \
@@ -26,12 +27,14 @@
           background-repeat: repeat;
           padding: 15px;}
 
-      .search_bar {
-          position:absolute;
-          left:75%;
-          top:14%;
-          width:30%;
-          }
+      .search_button {
+      color: white;
+      background-color: green;
+      border-color: white;
+      padding: 0px 0px 0px 0px;
+      width: 40px;
+      height: 40px;
+      }
 
       .delete_btn {
            border: none; /* Remove borders */
@@ -70,6 +73,10 @@
            color: Green;
                 }
 
+      .logo {
+           padding: 0px 5px 0px 0px
+      }
+
     </style>
 
     <link rel="shortcut icon" href='favicon/leeds_data_science_logo__1__C6d_icon.ico'/>
@@ -79,10 +86,11 @@
 
   <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+    <img src='https://i.imgur.com/o4rgCDl.png' alt="Logo" height='50px', width="50px" class = 'logo'>
 
       <a class="navbar-brand boxed" style="color:black" href="{% url 'home' %}">
-        <img src='https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678122-cogs-512.png'
-        alt="Cog" height='26px', width="26px")>Defect Classification App</a>
+        <img src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678122-cogs-512.png"
+        alt="Cog" height='26px', width="26px">Defect Classification App</a>
       {% if user.is_authenticated %}
       <a class="navbar-brand">|</a>
       <a class="navbar-brand" href="/articles/table">View Defects</a>
@@ -126,6 +134,7 @@
             Sign up</a>
           </form>
         {% endif %}
+
       </div>
     </nav>
     <div class="container">

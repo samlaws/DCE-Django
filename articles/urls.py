@@ -12,4 +12,5 @@ urlpatterns = [
     path('<int:pk>/delete/', views.ArticleDeleteView.as_view(), name='article_delete'),
     path('table', views.FilteredArticleListView.as_view(), name='table'),
     path('<int:pk>/reclassify/', views.ArticleReclassify.as_view(), name='article_reclassify'),
+
 ]

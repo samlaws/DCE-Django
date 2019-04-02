@@ -15,9 +15,9 @@ class ArticleTable(tables.Table):
 
     class Meta:
         model = models.Article
-
+        order_by = '-id'
         template_name = 'django_tables2/bootstrap.html'
-        fields = ('id', 'body', 'source', 'classification', 'reclassification', 'date', 'detail', 'delete')
+        fields = ('id', 'body', 'source', 'classification', 'reclassification', 'date', 'detail', 'delete', 'reclassify')
         attrs={'td': {'bgcolor': '#F3F3EE'},
             'th': {'bgcolor': '#61615F'},
             'tf': {'color': '#F3F3EE'}
