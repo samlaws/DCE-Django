@@ -12,11 +12,12 @@ class ArticleTable(tables.Table):
     reclassify = TemplateColumn(template_name = 'training_reclassify_column.html')
 
 
+
     class Meta:
         model = models.Article
 
         template_name = 'django_tables2/bootstrap.html'
-        fields = ('id', 'body', 'source', 'classification', 'date', 'detail', 'delete', 'reclassify', 'reclassification')
+        fields = ('id', 'body', 'source', 'classification', 'reclassification', 'date', 'detail', 'delete')
         attrs={'td': {'bgcolor': '#F3F3EE'},
             'th': {'bgcolor': '#61615F'},
             'tf': {'color': '#F3F3EE'}

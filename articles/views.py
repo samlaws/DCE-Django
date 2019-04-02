@@ -12,23 +12,18 @@ from django.shortcuts import render
 from .tables import ArticleTable
 from django.db.models import Q
 from django_tables2.config import RequestConfig
+from django_filters.views import FilterView
+from django_tables2.views import SingleTableMixin
+from .filters import ArticleFilter
 
-
-
-
-
-
-'''class ArticleListView(ListView):
+class FilteredArticleListView(SingleTableMixin, FilterView):
+    table_class = ArticleTable
     model = models.Article
-    template_name = 'article_table.html'
-    ordering = ['-date']
-    paginate_by = 50
+    template_name = 'table.html'
 
-class ArticleColumnView(TemplateView):
-    model = models.Article
-    template_name = 'classification_column.html'''
+    filterset_class = ArticleFilter
 
-
+'''
 def article_table(request):
 
     article = models.Article.objects.all()
@@ -37,8 +32,7 @@ def article_table(request):
 
     if 'search' in request.GET:
         search_term = request.GET['search']
-        article = article.filter(Q(body__icontains=search_term)|Q(source__icontains =search_term)|Q(id__icontains=search_term)
-        |Q(classification__icontains=search_term)|Q(reclassification__icontains=search_term))
+        article = article.filter(Q(body__icontains=search_term)|Q(source__icontains =search_term)|Q(id__icontains=search_term)|Q(classification__icontains=search_term))
 
 
     table = ArticleTable(article.order_by('-id'))
@@ -46,7 +40,7 @@ def article_table(request):
     RequestConfig(request).configure(table)
     context = {'search_term':search_term, 'article_table_instance': table}
     return render(request, 'table.html', context)
-
+'''
 
 class ArticleCreateView(CreateView):
     model = models.Article
@@ -75,10 +69,12 @@ class ArticleDeleteView(DeleteView):
     template_name = 'article_delete_2.html'
     success_url = reverse_lazy('table')
 
+
 class ArticleReclassify(UpdateView):
     model = models.Article
     fields = ['reclassification']
     template_name = 'article_reclassify.html'
+
 
 
 def article_upload(request):

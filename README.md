@@ -13,10 +13,10 @@
     * Dill
     * Sklearn
 
-  * Change the filepath for the model to your own
 
    ## TO DO
 
-   * Add filter functionality to the table view so the user can select a combination of sources and classifications to view
+   * Reproduce Michael's search bar functionality for searching body
+   * Make the table a fixed size
    * Add a Requirements.txt to the repository
    * Possibly add tests (shhh)
