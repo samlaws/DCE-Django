@@ -13,7 +13,6 @@
     * Dill
     * Sklearn
 
-  * Change the filepath for the model to your own
 
    ## TO DO
 
