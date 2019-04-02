@@ -2,13 +2,12 @@ import os
 from sklearn.externals import joblib
 from django.core.cache import cache
 from pathlib import Path
-from newspaper.settings import BASE_DIR
 
 def classify_defect(phrase):
 
     model_cache_key = 'mlp_model'
 
-    path = os.path.join(BASE_DIR, 'articles\\dce_model.pkl')
+    path = 'C:\\Users\\U89580\\Documents\\DCE Django Master\\articles\\dce_model.pkl'
 
     model = cache.get(model_cache_key)
 
