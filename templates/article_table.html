@@ -16,9 +16,9 @@
     {% for article in object_list %}
     <tr>
         <td>{{ article.id }}</td>
-        <td>{{article.body}}</td>
-        <td>{{article.body_str}}</td>
-        <td>{{article.source}}</td>
+        <td>{{ article.body }}</td>
+        <td>{{ article.body_str }}</td>
+        <td>{{ article.source }}</td>
         <td>{{ article.date.day }}/{{article.date.month}}/{{article.date.year}}-{{article.date.time}}</td>
     </tr>
     {% endfor %}
