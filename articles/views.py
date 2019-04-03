@@ -15,6 +15,9 @@ from django_tables2.config import RequestConfig
 from django_filters.views import FilterView
 from django_tables2.views import SingleTableMixin
 from .filters import ArticleFilter
+from django.db.models import Count
+from django.http import JsonResponse
+import json
 
 
 
@@ -121,3 +124,50 @@ def article_download(request):
         writer.writerow([obj.body, obj.classification])
 
     return response
+
+
+import json
+from django.db.models import Count, Q
+from django.shortcuts import render
+
+def graph_view(request):
+    dataset = models.Article.objects \
+        .values('classification') \
+        .annotate(true_count=Count('classification', filter=Q(reclassification__icontains = 'Not')),
+                  total_count=Count('classification')) \
+        .order_by('total_count')
+
+    classification_list = list()
+    #true_count_list = list()
+    total_count_list = list()
+
+    for entry in dataset:
+        classification_list.append(entry['classification'])
+        #true_count_list.append(entry['true_count'])
+        total_count_list.append(entry['total_count'])
+
+    '''true_series = {
+        'name': 'Actual Count',
+        'data': true_count_list,
+        'color': 'green'
+    }'''
+
+    total_series = {
+
+        'data': total_count_list,
+        'colorByPoint': True,
+        'showInLegend': False,
+
+    }
+
+    chart = {
+        'chart': {'type': 'column'},
+        'title': {'text': 'Defect Classification Analysis'},
+        'xAxis': {'categories': classification_list},
+        'series': [total_series],
+    }
+
+
+    dump = json.dumps(chart)
+
+    return render(request, 'graph.html', {'chart': dump})

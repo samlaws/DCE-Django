@@ -24,12 +24,12 @@ class Article(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     classification = models.CharField(default = 'Not Classified', max_length = 100, choices=STATUS_CHOICES_CLASS)
     classes = (
-        ('compliance', 'COMPLIANCE'),
-        ('functional', 'FUNCTIONAL'),
-        ('performance', 'PERFORMANCE'),
-        ('reliability and scalability issues', 'RELIABILITY AND SCALABILITY ISSUES'),
-        ('security', 'SECURITY'),
-        ('usability', 'USABILITY'),
+        ('Compliance', 'COMPLIANCE'),
+        ('Functional', 'FUNCTIONAL'),
+        ('Performance', 'PERFORMANCE'),
+        ('Reliability and scalability issues', 'RELIABILITY AND SCALABILITY ISSUES'),
+        ('Security', 'SECURITY'),
+        ('Usability', 'USABILITY'),
         )
     reclassification = models.CharField(default = 'Not Classified Yet', max_length = 50, choices = classes)
 

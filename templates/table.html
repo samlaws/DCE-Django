@@ -10,11 +10,14 @@
 <!-- The form -->
 
   {% if filter %}
+
       <form action="" method="get" class="form form-inline">
           {% bootstrap_form filter.form layout='inline' %}
-            <button class ='search_button' type="submit"><i class="fa fa-search"></i></button>
+          <button class ='search_button' type="submit"><i class="fa fa-search"></i></button>
       </form>
+
   {% endif %}
+
   {% render_table table 'django_tables2/bootstrap.html' %}
 
 {% else %}
