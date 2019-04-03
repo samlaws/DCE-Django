@@ -21,6 +21,6 @@
    * Make the table a fixed size
    * Add a Requirements.txt to the repository
    * Rework reclassification (Sorry Kieran)
-    * Add the reclassifaction form to the detail view?
-    * Hide the column in the table and change it so that the column stores the old value and the classification column stores the new
+      * Add the reclassifaction form to the detail view?
+      * Hide the column in the table and change it so that the column stores the old value and the classification column stores the new
    * Possibly add tests (shhh)
