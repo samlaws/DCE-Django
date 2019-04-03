@@ -2,23 +2,17 @@ from django.views.generic import ListView, CreateView, TemplateView, DetailView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.urls import reverse_lazy
 import csv
-from django.contrib import messages
+
 from django.shortcuts import HttpResponse, render, HttpResponseRedirect
 from . import models
-from .classifier import classify_defect
-from datetime import datetime
 import io
-from django.shortcuts import render
 from .tables import ArticleTable
-from django.db.models import Q
-from django_tables2.config import RequestConfig
 from django_filters.views import FilterView
 from django_tables2.views import SingleTableMixin
 from .filters import ArticleFilter
-from django.db.models import Count
-from django.http import JsonResponse
 import json
-
+from django.db.models import Count, Q
+from django.shortcuts import render
 
 
 class FilteredArticleListView(SingleTableMixin, FilterView):
@@ -126,48 +120,84 @@ def article_download(request):
     return response
 
 
-import json
-from django.db.models import Count, Q
-from django.shortcuts import render
 
-def graph_view(request):
+def bar_graph_view(request):
     dataset = models.Article.objects \
         .values('classification') \
-        .annotate(true_count=Count('classification', filter=Q(reclassification__icontains = 'Not')),
-                  total_count=Count('classification')) \
+        .annotate(total_count=Count('classification')) \
         .order_by('total_count')
 
     classification_list = list()
-    #true_count_list = list()
     total_count_list = list()
 
     for entry in dataset:
         classification_list.append(entry['classification'])
-        #true_count_list.append(entry['true_count'])
         total_count_list.append(entry['total_count'])
-
-    '''true_series = {
-        'name': 'Actual Count',
-        'data': true_count_list,
-        'color': 'green'
-    }'''
 
     total_series = {
 
         'data': total_count_list,
         'colorByPoint': True,
         'showInLegend': False,
-
     }
 
     chart = {
         'chart': {'type': 'column'},
-        'title': {'text': 'Defect Classification Analysis'},
+        'title': {'text': 'Defect Classification Analysis - Bar Chart'},
         'xAxis': {'categories': classification_list},
         'series': [total_series],
     }
+    dump = json.dumps(chart)
+    return render(request, 'graph.html', {'chart': dump})
 
+def sideways_graph_view(request):
+    dataset = models.Article.objects \
+        .values('classification') \
+        .annotate(total_count=Count('classification')) \
+        .order_by('total_count')
+
+    classification_list = list()
+    total_count_list = list()
+
+    for entry in dataset:
+        classification_list.append(entry['classification'])
+        total_count_list.append(entry['total_count'])
+
+    total_series = {
+
+        'data': total_count_list,
+        'colorByPoint': True,
+        'showInLegend': False,
+    }
+
+    chart = {
+        'chart': {'type': 'bar'},
+        'title': {'text': 'Defect Classification Analysis - Side Bar'},
+        'xAxis': {'categories': classification_list},
+        'series': [total_series],
+    }
+    dump = json.dumps(chart)
+    return render(request, 'graph.html', {'chart': dump})
+
+def pie_graph_view(request):
+    dataset = models.Article.objects \
+        .values('classification') \
+        .annotate(total_count=Count('classification')) \
+        .order_by('total_count')
+
+    display_name = dict()
+
+    for tuple in models.Article.classes:
+        display_name[tuple[0]] = tuple[1]
+
+    chart = {
+        'chart': {'type':'pie'},
+        'title':{'text':'Defect Classification Analysis - Pie Chart'},
+        'series':[{
+            'data': list(map(lambda row: {'name': display_name[row['classification']], 'y': row['total_count']}, dataset))
+        }]
+    }
 
     dump = json.dumps(chart)
-
     return render(request, 'graph.html', {'chart': dump})
+
