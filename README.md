@@ -16,9 +16,9 @@
 
    ## TO DO
 
-   * Reproduce Michael's search bar functionality for searching body
+   * ~~Reproduce Michael's search bar functionality for searching body~~ Complete on test branch waiting for merge
    * Figure out how to improve the pagination buttons at the bottom of the table
-   * Make the table a fixed size
+   * ~~Make the table a fixed size~~ Complete on test branch waiting for merge
    * Add a Requirements.txt to the repository
    * Rework reclassification (Sorry Kieran)
       * Add the reclassifaction form to the detail view?
