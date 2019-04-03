@@ -135,7 +135,7 @@ def bar_graph_view(request):
         total_count_list.append(entry['total_count'])
 
     total_series = {
-
+       
         'data': total_count_list,
         'colorByPoint': True,
         'showInLegend': False,
@@ -166,7 +166,7 @@ def sideways_graph_view(request):
     total_series = {
 
         'data': total_count_list,
-        'colorByPoint': True,
+        'colorByPoint':True,
         'showInLegend': False,
     }
 
