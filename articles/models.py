@@ -10,28 +10,29 @@ STATUS_CHOICES_SOURCE = (
 )
 
 STATUS_CHOICES_CLASS = (
+    ('Compliance', 'Compliance'),
     ('Functional', 'Functional'),
     ('Performance', 'Performance'),
-    ('Reliability and Scalability Issues', 'Reliability and Scalability Issues'),
+    ('Reliability and Scalability issues', 'Reliability and Scalability issues'),
     ('Security', 'Security'),
     ('Usability', 'Usability'),
-    ('Compliance', 'Compliance'),
+)
+
+classes = (
+    ('Compliance', 'COMPLIANCE'),
+    ('Functional', 'FUNCTIONAL'),
+    ('Performance', 'PERFORMANCE'),
+    ('Reliability and scalability issues', 'RELIABILITY AND SCALABILITY ISSUES'),
+    ('Security', 'SECURITY'),
+    ('Usability', 'USABILITY'),
 )
 
 class Article(models.Model):
     body = models.TextField()
     source = models.CharField(default='Entry', max_length=20, choices=STATUS_CHOICES_SOURCE)
     date = models.DateTimeField(auto_now_add=True)
-    classification = models.CharField(default = 'Not Classified', max_length = 100, choices=STATUS_CHOICES_CLASS)
-    classes = (
-        ('Compliance', 'COMPLIANCE'),
-        ('Functional', 'FUNCTIONAL'),
-        ('Performance', 'PERFORMANCE'),
-        ('Reliability and scalability issues', 'RELIABILITY AND SCALABILITY ISSUES'),
-        ('Security', 'SECURITY'),
-        ('Usability', 'USABILITY'),
-        )
-    reclassification = models.CharField(default = 'Not Classified Yet', max_length = 50, choices = classes)
+    classification = models.CharField(default = 'Not Classified', max_length = 40, choices=STATUS_CHOICES_CLASS)
+    reclassification = models.CharField(default = 'Not Classified Yet', max_length = 40, choices = classes)
 
 
     def __str__(self):

@@ -52,8 +52,9 @@ class FileError(TemplateView):
     template_name = 'error.html'
 
 
-class ArticleDetailView(DetailView):
+class ArticleDetailView(UpdateView):
     model = models.Article
+    fields = ['reclassification']
     template_name = 'article_details_2.html'
 
 
@@ -135,7 +136,7 @@ def bar_graph_view(request):
         total_count_list.append(entry['total_count'])
 
     total_series = {
-       
+
         'data': total_count_list,
         'colorByPoint': True,
         'showInLegend': False,
@@ -187,7 +188,7 @@ def pie_graph_view(request):
 
     display_name = dict()
 
-    for tuple in models.Article.classes:
+    for tuple in models.classes:
         display_name[tuple[0]] = tuple[1]
 
     chart = {

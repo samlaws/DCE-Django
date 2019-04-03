@@ -20,5 +20,6 @@ class ArticleTable(tables.Table):
         fields = ('id', 'body', 'source', 'classification', 'reclassification', 'date', 'detail', 'delete', 'reclassify')
         attrs={'td': {'bgcolor': '#F3F3EE'},
             'th': {'bgcolor': '#61615F'},
-            'tf': {'color': '#F3F3EE'}
+            'tf': {'color': '#F3F3EE'},
+
             }
