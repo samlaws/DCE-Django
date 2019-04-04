@@ -13,3 +13,12 @@ class DefectFilter(django_filters.FilterSet):
     class Meta:
         model = Defect
         fields = ['source', 'classification', 'reclassification', 'body']
+
+
+class GraphFilter(django_filters.FilterSet):
+
+    source = django_filters.ChoiceFilter(choices=STATUS_CHOICES_SOURCE, empty_label='Source')
+
+    class Meta:
+        model = Defect
+        fields = ['source']

@@ -2,6 +2,7 @@ from django.views.generic import ListView, CreateView, TemplateView, DetailView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.urls import reverse_lazy
 import csv
+import datetime as dt
 from datetime import datetime
 from django.shortcuts import HttpResponse, render, HttpResponseRedirect
 from . import models
@@ -9,7 +10,7 @@ import io
 from .tables import DefectTable
 from django_filters.views import FilterView
 from django_tables2.views import SingleTableMixin
-from .filters import DefectFilter
+from .filters import DefectFilter, GraphFilter
 import json
 from django.db.models import Count, Q
 from django_tables2.export.views import ExportMixin
@@ -120,6 +121,7 @@ def bar_graph_view(request):
         total_count_list.append(entry['total_count'])
 
     total_series = {
+        'name': 'Defects',
         'data': total_count_list,
         'colorByPoint': True,
         'showInLegend': False,
@@ -150,11 +152,12 @@ def sideways_graph_view(request):
         total_count_list.append(entry['total_count'])
 
     total_series = {
-
+        'name': 'Total Defects',
         'data': total_count_list,
-        'colorByPoint':True,
+        'colorByPoint': True,
         'showInLegend': False,
     }
+
 
     chart = {
         'chart': {'type': 'bar'},
@@ -181,7 +184,7 @@ def pie_graph_view(request):
     chart = {
         'chart': {'type':'pie'},
         'title':{'text':'Defect Classification Analysis - Pie Chart'},
-        'series':[{
+        'series':[{'name': 'Defects',
             'data': list(map(lambda row: {'name': display_name[row['classification']], 'y': row['total_count']}, dataset))
         }]
     }
@@ -189,3 +192,75 @@ def pie_graph_view(request):
     dump = json.dumps(chart)
     return render(request, 'graph.html', {'chart': dump})
 
+def daily_bar_view(request):
+
+    today_min = datetime.combine(datetime.now(), dt.time.min)
+    today_max = datetime.combine(datetime.now(), dt.time.max)
+
+    dataset = models.Defect.objects \
+        .values('classification') \
+        .annotate(daily_count=Count('classification', filter=Q(date__range = (today_min, today_max)))) \
+        .order_by('-daily_count')
+
+    classification_list = list()
+    daily_count_list = list()
+
+    for entry in dataset:
+        classification_list.append(entry['classification'])
+        daily_count_list.append(entry['daily_count'])
+
+    daily_series = {
+        'name': 'Defects',
+        'data': daily_count_list,
+        'colorByPoint': True,
+        'showInLegend': False,
+    }
+
+    chart = {
+        'chart': {'type': 'column'},
+        'title': {'text': 'Defect Classification Analysis - Bar Chart'},
+        'xAxis': {'categories': classification_list},
+        'series': [daily_series],
+    }
+
+    dump = json.dumps(chart)
+    return render(request, 'daily_graph.html', {'chart': dump})
+
+
+def monthly_bar_view(request):
+
+    today = datetime.now()
+
+
+    dataset = models.Defect.objects \
+        .values('classification') \
+        .annotate(month_count=Count('classification', filter=Q(date__month=today.month))) \
+        .order_by('-month_count')
+
+    classification_list = list()
+    month_count_list = list()
+
+    for entry in dataset:
+        classification_list.append(entry['classification'])
+        month_count_list.append(entry['month_count'])
+
+    month_series = {
+        'name': 'Defects',
+        'data': month_count_list,
+        'colorByPoint': True,
+        'showInLegend': False,
+    }
+
+    chart = {
+        'chart': {'type': 'column'},
+        'title': {'text': 'Defect Classification Analysis - Bar Chart'},
+        'xAxis': {'categories': classification_list},
+        'series': [month_series],
+    }
+
+    dump = json.dumps(chart)
+    return render(request, 'monthly_graph.html', {'chart': dump})
+
+class GraphPage(TemplateView):
+    model = models.Defect
+    template_name = 'graph_page.html'

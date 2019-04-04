@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load django_tables2 %}
 
 {% block content %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -8,10 +10,12 @@
 <a class="graph_btn" href = "{% url 'side_chart' %}"><i class="fas fa-chart-line"> Side Bar</i></a>
 <a class="graph_btn" href = "{% url 'pie_chart' %}"><i class="fas fa-chart-pie"> Pie</i></a>
 
+
 <div id="container"></div>
 <script src="https://code.highcharts.com/highcharts.src.js"></script>
 <script>
   Highcharts.chart('container', {{ chart|safe }});
 </script>
-
+<br>
+<a class="btn btn-primary" href="{% url 'graphs' %}">Defect Analysis</a>
 {% endblock content%}
