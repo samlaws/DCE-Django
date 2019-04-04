@@ -97,10 +97,10 @@ def defect_download(request):
     response['Content-Disposition'] = 'attachment; filename="defects.csv"'
 
     writer = csv.writer(response, delimiter =',')
-    writer.writerow(['Body', 'Classification'])
+    writer.writerow(['Body', 'Source', 'Classification', 'Reclassification', 'Date'])
 
     for obj in items:
-        writer.writerow([obj.body, obj.classification])
+        writer.writerow([obj.body, obj.source, obj.classification, obj.reclassification, obj.date])
 
     return response
 

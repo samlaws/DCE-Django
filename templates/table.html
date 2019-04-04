@@ -16,7 +16,7 @@
           {% bootstrap_form filter.form layout='inline' %}
           <button class ='search_button' type="submit"><i class="fa fa-search"></i></button>
           &nbsp  &nbsp &nbsp &nbsp &nbsp
-          <a href="download" class="download_button">Download <i class="fas fa-download"></i></a>
+          <a href="{% url 'download' %}" class="download_button">Download <i class="fas fa-download"></i></a>
           <a href="{% export_url 'csv' %}" class="download_button">Download Filter <i class="fas fa-download"></i></a>
 
       </form>

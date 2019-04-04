@@ -10,7 +10,7 @@
     {{ form.as_p }}
     <input type="submit" value="Save" />
 </form>
-<a href="/defects/upload">Or upload a csv...</a>
+<a href="{% url 'upload' %}">Or upload a csv...</a>
 
 
 {% else %}

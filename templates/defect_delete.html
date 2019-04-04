@@ -17,7 +17,7 @@
   {% csrf_token %}
         <br>
     <button class="btn btn-danger" type="submit">Confirm</button>
-          <a href="/defects/table" class="btn btn-primary">Go Back</a>
+          <a href="{% url 'table' %}" class="btn btn-primary">Go Back</a>
 </form>
   </div>
 </div>

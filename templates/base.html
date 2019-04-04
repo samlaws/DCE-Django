@@ -36,7 +36,7 @@
           width: 40px;
           height: 38px;
           position:absolute;
-          left:66.9%;
+          left:66.6%;
           top:17.15%;
           border-radius: 7.8px;
       }
@@ -122,11 +122,11 @@
              alt="Cog" height='26px', width="26px"><span style = "font-family:Courier New">Defect Classification App</span></a>
       {% if user.is_authenticated %}
       <a class="navbar-brand">|</a>
-      <a class="navbar-brand" href="/defects/table"><span style = "font-family:Courier New">View Defects</span></a>
+      <a class="navbar-brand" href="{% url 'table' %}"><span style = "font-family:Courier New">View Defects</span></a>
       <a class="navbar-brand">|</a>
-      <a class="navbar-brand" href="/defects\new"><span style = "font-family:Courier New">Add new Defect</span></a>
+      <a class="navbar-brand" href="{% url 'defect_new' %}"><span style = "font-family:Courier New">Add new Defect</span></a>
       <a class="navbar-brand">|</a>
-      <a class="navbar-brand" href="/defects\graph/bar"><span style = "font-family:Courier New">Defect Count</span></a>
+      <a class="navbar-brand" href="{% url 'bar_chart' %}"><span style = "font-family:Courier New">Defect Count</span></a>
       {% else %}
       {% endif %}
 
