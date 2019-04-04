@@ -11,15 +11,25 @@
     * Django Crispy Forms
     * Django Tables 2
     * Dill
+    * Tablib
     * Sklearn
-
+    
+  The quickest way to get these packages is to follow these steps in Anaconda prompt or the Command Line
+  
+  1. Navigate to the project directory
+  2. Create a virtual environment
+  3. Install the requirements using pip
+  
+  ```
+  pip install -r requirements.txt
+  ```
 
    ## TO DO
 
-   * Reproduce Michael's search bar functionality for searching body
+   * ~~Reproduce Michael's search bar functionality for searching body~~ Complete on test branch waiting for merge
    * Figure out how to improve the pagination buttons at the bottom of the table
-   * Make the table a fixed size
-   * Add a Requirements.txt to the repository
+   * ~~Make the table a fixed size~~ Complete on test branch waiting for merge
+   * ~~Add a Requirements.txt to the repository~~
    * Rework reclassification (Sorry Kieran)
       * Add the reclassifaction form to the detail view?
       * Hide the column in the table and change it so that the column stores the old value and the classification column stores the new
