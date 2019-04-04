@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     #local
     'users',
     'pages',
-    'articles',
+    'defects',
 
 
 

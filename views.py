@@ -50,7 +50,7 @@ def article_table(request):
 
 class ArticleCreateView(CreateView):
     model = models.Article
-    template_name = 'article_new.html'
+    template_name = 'defect_new.html'
     fields = ['body']
 
 
@@ -61,23 +61,23 @@ class FileError(TemplateView):
 
 class ArticleDetailView(DetailView):
     model = models.Article
-    template_name = 'article_details_2.html'
+    template_name = 'defect_details.html'
 
 
 class ArticleUpdateView(UpdateView):
     model = models.Article
     fields = ['body']
-    template_name = 'article_edit.html'
+    template_name = 'defect_edit.html'
 
 
 class ArticleDeleteView(DeleteView):
     model = models.Article
-    template_name = 'article_delete_2.html'
+    template_name = 'defect_delete.html'
     success_url = reverse_lazy('table')
 
 
 def article_upload(request):
-    template = 'article_upload.html'
+    template = 'defect_upload.html'
 
     prompt = {
         'prompt':'Hello there...'
@@ -89,7 +89,7 @@ def article_upload(request):
     csv_file = request.FILES['file']
 
     if not csv_file.name.endswith('.csv'):
-        return HttpResponseRedirect('/articles/error')
+        return HttpResponseRedirect('/defects/error')
 
     data_set = csv_file.read().decode('UTF-8')
     io_string = io.StringIO(data_set)
