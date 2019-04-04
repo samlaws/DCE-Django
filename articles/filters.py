@@ -12,4 +12,4 @@ class ArticleFilter(django_filters.FilterSet):
 
     class Meta:
         model = Article
-        fields = [ 'id', 'source', 'classification', 'reclassification', 'body']
+        fields = ['source', 'classification', 'reclassification', 'body']

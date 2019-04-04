@@ -4,6 +4,9 @@ from . import models
 from .classifier import classify_defect
 
 class ArticleTable(tables.Table):
+
+    export_formats = ['csv']
+
     id = Column(initial_sort_descending=True)
     #body_str = Column(verbose_name='Classification', order_by=('id'))
     #date = DateTimeColumn(format='d-m-y H:i', )
@@ -23,3 +26,4 @@ class ArticleTable(tables.Table):
             'tf': {'color': '#F3F3EE'},
 
             }
+

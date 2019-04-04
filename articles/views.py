@@ -2,7 +2,7 @@ from django.views.generic import ListView, CreateView, TemplateView, DetailView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.urls import reverse_lazy
 import csv
-
+from datetime import datetime
 from django.shortcuts import HttpResponse, render, HttpResponseRedirect
 from . import models
 import io
@@ -13,12 +13,14 @@ from .filters import ArticleFilter
 import json
 from django.db.models import Count, Q
 from django.shortcuts import render
+from django_tables2.export.views import ExportMixin
 
-
-class FilteredArticleListView(SingleTableMixin, FilterView):
+class FilteredArticleListView(ExportMixin, SingleTableMixin, FilterView):
     table_class = ArticleTable
     model = models.Article
     template_name = 'table.html'
+    export_name = 'Defect Data ' + datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    exclude_columns = ('id', 'detail', 'delete', 'reclassify')
 
     filterset_class = ArticleFilter
 
@@ -126,7 +128,7 @@ def bar_graph_view(request):
     dataset = models.Article.objects \
         .values('classification') \
         .annotate(total_count=Count('classification')) \
-        .order_by('total_count')
+        .order_by('-total_count')
 
     classification_list = list()
     total_count_list = list()
@@ -155,7 +157,7 @@ def sideways_graph_view(request):
     dataset = models.Article.objects \
         .values('classification') \
         .annotate(total_count=Count('classification')) \
-        .order_by('total_count')
+        .order_by('-total_count')
 
     classification_list = list()
     total_count_list = list()
@@ -184,7 +186,7 @@ def pie_graph_view(request):
     dataset = models.Article.objects \
         .values('classification') \
         .annotate(total_count=Count('classification')) \
-        .order_by('total_count')
+        .order_by('-total_count')
 
     display_name = dict()
 
