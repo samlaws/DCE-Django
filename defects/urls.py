@@ -15,6 +15,10 @@ urlpatterns = [
     path('graph/sidebar/', views.sideways_graph_view, name='side_chart'),
     path('graph/pie/', views.pie_graph_view, name='pie_chart'),
     path('graph/bar/daily/', views.daily_bar_view, name = 'daily_bar'),
-    path('graph/bar/monthly/', views.monthly_bar_view, name = 'monthly_bar'),
+    path('graph/sidebar/daily/', views.daily_side_view, name = 'daily_side_bar'),
+    path('graph/pie/daily/', views.daily_pie_view, name = 'daily_pie_chart'),
+    path('graph/bar/monthly/', views.monthly_bar_view, name = 'monthly_bar_chart'),
+    path('graph/sidebar/monthly/', views.monthly_side_view, name = 'monthly_side_bar'),
+    path('graph/pie/monthly/', views.monthly_pie_view, name='monthly_pie_chart'),
     path('graph', views.GraphPage.as_view(), name = 'graphs'),
 ]

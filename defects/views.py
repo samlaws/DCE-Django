@@ -226,6 +226,65 @@ def daily_bar_view(request):
     dump = json.dumps(chart)
     return render(request, 'daily_graph.html', {'chart': dump})
 
+def daily_side_view(request):
+
+    today_min = datetime.combine(datetime.now(), dt.time.min)
+    today_max = datetime.combine(datetime.now(), dt.time.max)
+
+    dataset = models.Defect.objects \
+        .values('classification') \
+        .annotate(daily_count=Count('classification', filter=Q(date__range = (today_min, today_max)))) \
+        .order_by('-daily_count')
+
+    classification_list = list()
+    daily_count_list = list()
+
+    for entry in dataset:
+        classification_list.append(entry['classification'])
+        daily_count_list.append(entry['daily_count'])
+
+    daily_series = {
+        'name': 'Defects',
+        'data': daily_count_list,
+        'colorByPoint': True,
+        'showInLegend': False,
+    }
+
+    chart = {
+        'chart': {'type': 'bar'},
+        'title': {'text': 'Defect Classification Analysis - Bar Chart'},
+        'xAxis': {'categories': classification_list},
+        'series': [daily_series],
+    }
+
+    dump = json.dumps(chart)
+    return render(request, 'daily_graph.html', {'chart': dump})
+
+def daily_pie_view(request):
+
+    today_min = datetime.combine(datetime.now(), dt.time.min)
+    today_max = datetime.combine(datetime.now(), dt.time.max)
+
+    dataset = models.Defect.objects \
+        .values('classification') \
+        .annotate(daily_count=Count('classification', filter=Q(date__range = (today_min, today_max)))) \
+        .order_by('-daily_count')
+
+    display_name = dict()
+
+    for tuple in models.CLASSES:
+        display_name[tuple[0]] = tuple[1]
+
+    chart = {
+        'chart': {'type':'pie'},
+        'title':{'text':'Defect Classification Analysis - Pie Chart'},
+        'series':[{'name': 'Defects',
+            'data': list(map(lambda row: {'name': display_name[row['classification']], 'y': row['daily_count']}, dataset))
+        }]
+    }
+
+    dump = json.dumps(chart)
+    return render(request, 'daily_graph.html', {'chart': dump})
 
 def monthly_bar_view(request):
 
@@ -256,6 +315,66 @@ def monthly_bar_view(request):
         'title': {'text': 'Defect Classification Analysis - Bar Chart'},
         'xAxis': {'categories': classification_list},
         'series': [month_series],
+    }
+
+    dump = json.dumps(chart)
+    return render(request, 'monthly_graph.html', {'chart': dump})
+
+def monthly_side_view(request):
+
+    today = datetime.now()
+
+
+    dataset = models.Defect.objects \
+        .values('classification') \
+        .annotate(month_count=Count('classification', filter=Q(date__month=today.month))) \
+        .order_by('-month_count')
+
+    classification_list = list()
+    month_count_list = list()
+
+    for entry in dataset:
+        classification_list.append(entry['classification'])
+        month_count_list.append(entry['month_count'])
+
+    month_series = {
+        'name': 'Defects',
+        'data': month_count_list,
+        'colorByPoint': True,
+        'showInLegend': False,
+    }
+
+    chart = {
+        'chart': {'type': 'bar'},
+        'title': {'text': 'Defect Classification Analysis - Bar Chart'},
+        'xAxis': {'categories': classification_list},
+        'series': [month_series],
+    }
+
+    dump = json.dumps(chart)
+    return render(request, 'monthly_graph.html', {'chart': dump})
+
+def monthly_pie_view(request):
+
+    today = datetime.now()
+
+
+    dataset = models.Defect.objects \
+        .values('classification') \
+        .annotate(month_count=Count('classification', filter=Q(date__month = today.month))) \
+        .order_by('-month_count')
+
+    display_name = dict()
+
+    for tuple in models.CLASSES:
+        display_name[tuple[0]] = tuple[1]
+
+    chart = {
+        'chart': {'type':'pie'},
+        'title':{'text':'Defect Classification Analysis - Pie Chart'},
+        'series':[{'name': 'Defects',
+            'data': list(map(lambda row: {'name': display_name[row['classification']], 'y': row['month_count']}, dataset))
+        }]
     }
 
     dump = json.dumps(chart)
