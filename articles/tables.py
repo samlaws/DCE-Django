@@ -20,8 +20,7 @@ class ArticleTable(tables.Table):
     export_formats = ['csv']
 
     id = Column(initial_sort_descending=True)
-    #body_str = Column(verbose_name='Classification', order_by=('id'))
-    #date = DateTimeColumn(format='d-m-y H:i', )
+    body = DivWrappedColumn(classname='custom_column')
     detail = TemplateColumn(template_name='training_update_column.html')
     delete = TemplateColumn(template_name='training_delete_column.html')
     reclassify = TemplateColumn(template_name = 'training_reclassify_column.html')

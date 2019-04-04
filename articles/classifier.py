@@ -27,7 +27,7 @@ def classify_defect(phrase):
     elif prediction == [2]:
         return 'Performance'
     elif prediction == [3]:
-	    return 'Reliability and Scalability Issues'
+	    return 'Reliability and Scalability'
     elif prediction == [4]:
 	    return 'Security'
     elif prediction == [5]:

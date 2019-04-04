@@ -13,7 +13,7 @@ STATUS_CHOICES_CLASS = (
     ('Compliance', 'Compliance'),
     ('Functional', 'Functional'),
     ('Performance', 'Performance'),
-    ('Reliability and Scalability issues', 'Reliability and Scalability issues'),
+    ('Reliability and Scalability', 'Reliability and Scalability'),
     ('Security', 'Security'),
     ('Usability', 'Usability'),
 )
@@ -22,7 +22,7 @@ classes = (
     ('Compliance', 'COMPLIANCE'),
     ('Functional', 'FUNCTIONAL'),
     ('Performance', 'PERFORMANCE'),
-    ('Reliability and scalability issues', 'RELIABILITY AND SCALABILITY ISSUES'),
+    ('Reliability and scalability', 'RELIABILITY AND SCALABILITY'),
     ('Security', 'SECURITY'),
     ('Usability', 'USABILITY'),
 )
