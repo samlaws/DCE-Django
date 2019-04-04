@@ -1,7 +1,19 @@
 import django_tables2 as tables
 from django_tables2 import TemplateColumn, Column, DateTimeColumn
 from . import models
-from .classifier import classify_defect
+from django.utils.safestring import mark_safe
+
+
+class DivWrappedColumn(tables.Column):
+
+    def __init__(self, classname=None, *args, **kwargs):
+        self.classname=classname
+        super(DivWrappedColumn, self).__init__(*args, **kwargs)
+
+    def render(self, value):
+        return mark_safe("<div class='" + self.classname + "' >" +value+"</div>")
+
+
 
 class ArticleTable(tables.Table):
 
@@ -27,3 +39,5 @@ class ArticleTable(tables.Table):
 
             }
 
+    def render_body(self, value):
+        return value
