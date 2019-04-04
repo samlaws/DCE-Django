@@ -137,6 +137,7 @@ def bar_graph_view(request):
     dump = json.dumps(chart)
     return render(request, 'graph.html', {'chart': dump})
 
+
 def sideways_graph_view(request):
 
     dataset = models.Defect.objects \
@@ -169,6 +170,7 @@ def sideways_graph_view(request):
     dump = json.dumps(chart)
     return render(request, 'graph.html', {'chart': dump})
 
+
 def pie_graph_view(request):
 
     dataset = models.Defect.objects \
@@ -191,6 +193,7 @@ def pie_graph_view(request):
 
     dump = json.dumps(chart)
     return render(request, 'graph.html', {'chart': dump})
+
 
 def daily_bar_view(request):
 
@@ -226,6 +229,7 @@ def daily_bar_view(request):
     dump = json.dumps(chart)
     return render(request, 'daily_graph.html', {'chart': dump})
 
+
 def daily_side_view(request):
 
     today_min = datetime.combine(datetime.now(), dt.time.min)
@@ -260,6 +264,7 @@ def daily_side_view(request):
     dump = json.dumps(chart)
     return render(request, 'daily_graph.html', {'chart': dump})
 
+
 def daily_pie_view(request):
 
     today_min = datetime.combine(datetime.now(), dt.time.min)
@@ -285,6 +290,7 @@ def daily_pie_view(request):
 
     dump = json.dumps(chart)
     return render(request, 'daily_graph.html', {'chart': dump})
+
 
 def monthly_bar_view(request):
 
@@ -320,6 +326,7 @@ def monthly_bar_view(request):
     dump = json.dumps(chart)
     return render(request, 'monthly_graph.html', {'chart': dump})
 
+
 def monthly_side_view(request):
 
     today = datetime.now()
@@ -354,10 +361,10 @@ def monthly_side_view(request):
     dump = json.dumps(chart)
     return render(request, 'monthly_graph.html', {'chart': dump})
 
+
 def monthly_pie_view(request):
 
     today = datetime.now()
-
 
     dataset = models.Defect.objects \
         .values('classification') \
@@ -379,6 +386,48 @@ def monthly_pie_view(request):
 
     dump = json.dumps(chart)
     return render(request, 'monthly_graph.html', {'chart': dump})
+
+
+def stacked_bar_view(request):
+
+    dataset = models.Defect.objects \
+        .values('classification') \
+        .annotate(csv_count=Count('classification', filter = Q(source__iexact = 'csv')),
+                  entry_count = Count('classification', filter = Q(source__iexact = 'Entry'))
+                  ) \
+        .order_by('-csv_count')
+
+    category_list = list()
+    csv_list = list()
+    entry_list = list()
+
+    for entry in dataset:
+        category_list.append(entry['classification'])
+        csv_list.append(entry['csv_count'])
+        entry_list.append(entry['entry_count'])
+
+    csv_series = {
+        'name': 'CSV File',
+        'data': csv_list,
+    }
+
+    entry_series = {
+        'name': 'Entry',
+        'data': entry_list,
+    }
+
+    chart  = {
+        'chart': {'type': 'bar'},
+        'title': {'text': 'Defect Classification Analysis - Bar Chart'},
+        'xAxis': {'categories': category_list},
+        'plotOptions': {'series': {'stacking': 'normal', 'dataLabels': {'enabled':False}}},
+        'series': [csv_series, entry_series],
+        'yAxis': {'title': {'text': 'Number of Classified Defects'}, 'stackLabels': {'enabled':False, 'style': {'fontWeight':'bold'}}},
+        'tooltip': {'headerFormat': '<b>{point.x}</b><br/>', 'pointFormat': '{series.name}: {point.y}<br/>Total: {point.stackTotal}'}
+    }
+
+    dump = json.dumps(chart)
+    return render(request, 'graph.html', {'chart': dump})
 
 class GraphPage(TemplateView):
     model = models.Defect

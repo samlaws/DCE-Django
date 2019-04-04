@@ -14,6 +14,7 @@ urlpatterns = [
     path('graph/bar/', views.bar_graph_view, name='bar_chart'),
     path('graph/sidebar/', views.sideways_graph_view, name='side_chart'),
     path('graph/pie/', views.pie_graph_view, name='pie_chart'),
+    path('graph/stacked/', views.stacked_bar_view, name='stacked_bar'),
     path('graph/bar/daily/', views.daily_bar_view, name = 'daily_bar'),
     path('graph/sidebar/daily/', views.daily_side_view, name = 'daily_side_bar'),
     path('graph/pie/daily/', views.daily_pie_view, name = 'daily_pie_chart'),
