@@ -13,9 +13,19 @@
       <p class="card-text text-center">A Visual, Interactive Guide to Defect Classification.<br>
           Utilising High-Quality, State of the Art Visualisation Techniques </p>
       <div class="card-footer text-center">
-        <a class="graph_btn_2" href="{% url 'bar_chart' %}"><i class="fas fa-chart-bar"> Total Defects</i></a>
-        <a class="graph_btn_2" href = "{% url 'monthly_bar_chart' %}"><i class="fas fa-calendar"> Monthly Defects</i></a>
-        <a class="graph_btn_2" href = "{% url 'daily_bar' %}"><i class="fas fa-clock"> Daily Defects</i></a>
+        <a class="graph_btn_2" href="{% url 'bar_chart' %}"><i class="fas fa-chart-bar"> Defects - Total</i></a>
+        <a class="graph_btn_2" href = "{% url 'monthly_bar_chart' %}"><i class="fas fa-calendar"> Defects -
+          <script type="text/javascript">
+                var monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"];
+
+                var d = new Date();
+                    document.write(monthNames[d.getMonth()]);
+            </script>
+          </i></a>
+        <a class="graph_btn_2" href = "{% url 'daily_bar' %}"><i class="fas fa-clock"> Defects -
+          <script> document.write(new Date().toLocaleDateString()); </script>
+          </i></a>
       </div>
   </div>
   </div>

@@ -6,11 +6,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
-<div class="card" style="width: 20rem; margin: 0 auto; margin-top: 0rem;">
+<div class="card" style="width: 40rem; margin: 0 auto; margin-top: 0rem;">
     <div class="card-body">
-        <h2 align = 'center'><span style = "font-family:Courier New">Daily Defects</h2></span>
+        <h2 align = 'center'><span style = "font-family:Courier New"><script> document.write(new Date().toDateString()); </script> Defects</h2></span>
     </div>
 </div>
+<br>
 <a class="graph_btn" href="{% url 'daily_bar' %}"><i class="fas fa-chart-bar"> Bar</i></a>
 <a class="graph_btn" href="{% url 'daily_side_bar' %}"><i class="fas fa-chart-line"> Side Bar</i></a>
 <a class="graph_btn" href="{% url 'daily_pie_chart' %}"><i class="fas fa-chart-pie"> Pie</i></a>
