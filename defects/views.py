@@ -65,7 +65,7 @@ def defect_upload(request):
     template = 'defect_upload.html'
 
     prompt = {
-        'prompt':'Hello there...'
+        'prompt': 'Hello there...'
     }
 
     if request.method == 'GET':
@@ -84,20 +84,18 @@ def defect_upload(request):
             body=column[0],
             source='csv')
 
-    context = {}
-
-    return HttpResponseRedirect('table') #render(request, template, context)
+    return HttpResponseRedirect('table')
 
 
 def defect_download(request):
 
     items = models.Defect.objects.all()
 
-    response = HttpResponse(content_type = 'text/csv')
+    response = HttpResponse(content_type='text/csv')
 
     response['Content-Disposition'] = 'attachment; filename="defects.csv"'
 
-    writer = csv.writer(response, delimiter =',')
+    writer = csv.writer(response, delimiter=',')
     writer.writerow(['Body', 'Source', 'Classification', 'Reclassification', 'Date'])
 
     for obj in items:
@@ -159,7 +157,6 @@ def sideways_graph_view(request):
         'showInLegend': False,
     }
 
-
     chart = {
         'chart': {'type': 'bar'},
         'title': {'text': 'Defect Classification Analysis - Side Bar'},
@@ -184,11 +181,12 @@ def pie_graph_view(request):
         display_name[tuple[0]] = tuple[1]
 
     chart = {
-        'chart': {'type':'pie'},
-        'title':{'text':'Defect Classification Analysis - Pie Chart'},
-        'series':[{'name': 'Defects',
-            'data': list(map(lambda row: {'name': display_name[row['classification']], 'y': row['total_count']}, dataset))
-        }]
+        'chart': {'type': 'pie'},
+        'title': {'text': 'Defect Classification Analysis - Pie Chart'},
+        'series': [{'name': 'Defects',
+                    'data': list(map(lambda row: {'name': display_name[row['classification']],
+                                                  'y': row['total_count']}, dataset))
+                    }]
     }
 
     dump = json.dumps(chart)
@@ -299,7 +297,7 @@ def monthly_bar_view(request):
 
     dataset = models.Defect.objects \
         .values('classification') \
-        .annotate(month_count=Count('classification', filter=Q(date__month=today.month))) \
+        .annotate(month_count=Count('classification', filter=Q(date__month=today.month) | Q(date__year=today.year))) \
         .order_by('-month_count')
 
     classification_list = list()
@@ -422,7 +420,7 @@ def stacked_bar_view(request):
         'xAxis': {'categories': category_list},
         'plotOptions': {'series': {'stacking': 'normal', 'dataLabels': {'enabled':False}}},
         'series': [csv_series, entry_series],
-        'yAxis': {'title': {'text': 'Number of Classified Defects'}, 'stackLabels': {'enabled':False, 'style': {'fontWeight':'bold'}}},
+        'yAxis': {'title': {'text': 'Number of Classified Defects'}, 'stackLabels': {'enabled':True, 'style': {'fontWeight':'bold'}}},
         'tooltip': {'headerFormat': '<b>{point.x}</b><br/>', 'pointFormat': '{series.name}: {point.y}<br/>Total: {point.stackTotal}'}
     }
 
